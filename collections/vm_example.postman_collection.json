@@ -1,0 +1,1891 @@
+{
+	"info": {
+		"_postman_id": "1ef63047-c2b5-45ca-a34c-d19dc7a73e10",
+		"name": "vCD API - VM Example",
+		"description": "This example is a showcase of how to create vm and delete vm. Please following the order of API request in each collection to implement your own procedure.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21829237"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.environment.set(\"vcd_access_token\", postman.getResponseHeader(\"x-vmware-vcloud-access-token\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{vcd_password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{vcd_username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://{{vcd_api_host}}/api/sessions",
+							"protocol": "https",
+							"host": [
+								"{{vcd_api_host}}"
+							],
+							"path": [
+								"api",
+								"sessions"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieves the access token by providing username and password in session endpoint."
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*;version=36.2",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/sessions",
+									"protocol": "https",
+									"host": [
+										"api-vcd-sz101",
+										"testportal",
+										"up",
+										"australiacloud",
+										"com",
+										"au"
+									],
+									"path": [
+										"api",
+										"sessions"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.session+xml;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:11:45 GMT"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vcloud-authorization",
+									"value": "b9282e564df84abe957ed34846c196a6"
+								},
+								{
+									"key": "x-vmware-vcloud-access-token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4LjEiLCJpc3MiOiI1NDE4NDA0Mi03ZDYzLTQxYTItYmU2Mi0xNGE1MzM3YWQ0MWNAZWMxOWYwODgtMzBiMi00YTZmLTk2ODItNmFjZmNkNThmNWI5IiwiZXhwIjoxNjU3NTgxMTA1LCJ2ZXJzaW9uIjoidmNsb3VkXzEuMCIsImp0aSI6ImI5MjgyZTU2NGRmODRhYmU5NTdlZDM0ODQ2YzE5NmE2In0.H9rcVBqPWTn2Zp5j7nddymt-aAg6mciUfXIJ8-wFx7oKIE8KdzX13CfLT7FZ0ECSpP3emSGqORV4N4yufvvOV6LEoElz1u2BdqSrv0j2HCSVUNM_tRDOjwff_ZuBOl9GoRIqYp-SUWDYFRs98cC7ZtOxDhsO8o1wCbtQ31xA1ro6Z1g6LOT0V5wt4RI40-5-DkpuFtw2bPw6gl-CKyhbwEAvj77eBPs0L9XCmEbECkbaM07lh5w-23B7EMhzMEq8TWJkR74xVfeXBeUGQusED_6uS6sdGwUFdr852nPXOSM-sp1aPgx1T5LUpzL7b2uIqJ-srnluByHoUNDqFcithg"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "533,534"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "45967e0f-b7d6-4e64-8b52-5ee7b72f442b"
+								},
+								{
+									"key": "x-vmware-vcloud-token-type",
+									"value": "Bearer"
+								},
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Session xmlns=\"http://www.vmware.com/vcloud/v1.5\" xmlns:vmext=\"http://www.vmware.com/vcloud/extension/v1.5\" xmlns:ovf=\"http://schemas.dmtf.org/ovf/envelope/1\" xmlns:vssd=\"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData\" xmlns:common=\"http://schemas.dmtf.org/wbem/wscim/1/common\" xmlns:rasd=\"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData\" xmlns:vmw=\"http://www.vmware.com/schema/ovf\" xmlns:ovfenv=\"http://schemas.dmtf.org/ovf/environment/1\" xmlns:ns9=\"http://www.vmware.com/vcloud/versions\" user=\"8.1\" org=\"sz101-1-1\" userId=\"urn:vcloud:user:80af3db2-a3c1-49bd-867e-e60cf840ac26\" roles=\"Organization Administrator\" locationId=\"54184042-7d63-41a2-be62-14a5337ad41c@ec19f088-30b2-4a6f-9682-6acfcd58f5b9\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/session\" type=\"application/vnd.vmware.vcloud.session+xml\">\n    <Link rel=\"down\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/org/\" type=\"application/vnd.vmware.vcloud.orgList+xml\"/>\n    <Link rel=\"down\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/org/\" type=\"application/vnd.vmware.vcloud.orgList+json\"/>\n    <Link rel=\"remove\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/session\"/>\n    <Link rel=\"down\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/\" type=\"application/vnd.vmware.admin.vcloud+xml\"/>\n    <Link rel=\"down\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/\" type=\"application/vnd.vmware.admin.vcloud+json\"/>\n    <Link rel=\"down\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/org/54184042-7d63-41a2-be62-14a5337ad41c\" type=\"application/vnd.vmware.vcloud.org+xml\" name=\"sz101-1-1\"/>\n    <Link rel=\"down\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/org/54184042-7d63-41a2-be62-14a5337ad41c\" type=\"application/vnd.vmware.vcloud.org+json\" name=\"sz101-1-1\"/>\n    <Link rel=\"down\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query\" type=\"application/vnd.vmware.vcloud.query.queryList+xml\"/>\n    <Link rel=\"down\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query\" type=\"application/vnd.vmware.vcloud.query.queryList+json\"/>\n    <Link rel=\"entityResolver\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/entity/\" type=\"application/vnd.vmware.vcloud.entity+xml\"/>\n    <Link rel=\"entityResolver\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/entity/\" type=\"application/vnd.vmware.vcloud.entity+json\"/>\n    <Link rel=\"down:extensibility\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/extensibility\" type=\"application/vnd.vmware.vcloud.apiextensibility+xml\"/>\n    <Link rel=\"down:extensibility\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/extensibility\" type=\"application/vnd.vmware.vcloud.apiextensibility+json\"/>\n    <Link rel=\"nsx\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/network\" type=\"application/xml\"/>\n    <Link rel=\"openapi\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/cloudapi\" type=\"application/json\"/>\n    <AuthorizedLocations>\n        <Location>\n            <LocationId>54184042-7d63-41a2-be62-14a5337ad41c@ec19f088-30b2-4a6f-9682-6acfcd58f5b9</LocationId>\n            <SiteName>api-vcd-sz101.testportal.up.australiacloud.com.au</SiteName>\n            <OrgName>sz101-1-1</OrgName>\n            <RestApiEndpoint>https://api-vcd-sz101.testportal.up.australiacloud.com.au</RestApiEndpoint>\n            <UIEndpoint>https://vcd-sz101.testportal.up.australiacloud.com.au</UIEndpoint>\n            <AuthContext>sz101-1-1</AuthContext>\n            <ApiVersion>36.3</ApiVersion>\n        </Location>\n    </AuthorizedLocations>\n</Session>"
+						}
+					]
+				}
+			],
+			"description": "Example demonstrating use of the session endpoint to retrieve access token."
+		},
+		{
+			"name": "Create VM",
+			"item": [
+				{
+					"name": "2. Get Sample VDC URL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const url = responseJson.record[0].href;",
+									"",
+									"pm.environment.set(\"vdc_url\", url);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+json;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vcd_api_host}}/api/query?type=orgVdc",
+							"protocol": "https",
+							"host": [
+								"{{vcd_api_host}}"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "orgVdc"
+								}
+							]
+						},
+						"description": "Retrieve the VDC URL. This is a base URL for action create VM in step 8."
+					},
+					"response": [
+						{
+							"name": "2. Get Sample VDC URL",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+json;version=36.2",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc",
+									"protocol": "https",
+									"host": [
+										"api-vcd-sz101",
+										"testportal",
+										"up",
+										"australiacloud",
+										"com",
+										"au"
+									],
+									"path": [
+										"api",
+										"query"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "orgVdc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.query.records+json;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:12:15 GMT"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "32,32"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "72e17193-4a81-4f04-9f66-10aa7be7c474"
+								},
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"otherAttributes\": {},\n    \"link\": [\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=references\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=references\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=idrecords\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.idrecords+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=idrecords\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.idrecords+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        }\n    ],\n    \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=records\",\n    \"type\": \"application/vnd.vmware.vcloud.query.records+json\",\n    \"name\": \"orgVdc\",\n    \"page\": 1,\n    \"pageSize\": 25,\n    \"total\": 2,\n    \"record\": [\n        {\n            \"_type\": \"QueryResultOrgVdcRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/94d7b238-a1a5-45f8-a4a6-49b5bb368a3e\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"cpuOverheadMhz\": \"0\",\n                \"pvdcHardwareVersion\": \"15\",\n                \"taskStatusName\": \"vdcUpdateVdc\",\n                \"task\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/85b9df1a-59d1-4fa3-a21f-a483064e5beb\",\n                \"allocationModel\": \"1\",\n                \"networkPool\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/extension/networkPool/81888d64-20ad-43ea-b6e4-b3527b44fb14\",\n                \"storageOverheadMB\": \"0\",\n                \"memoryOverheadMB\": \"616\",\n                \"taskStatus\": \"success\",\n                \"taskDetails\": \" \"\n            },\n            \"name\": \"sz101-1-1\",\n            \"description\": \"sz101-1-1\",\n            \"computeProviderScope\": null,\n            \"networkProviderScope\": null,\n            \"isEnabled\": true,\n            \"cpuAllocationMhz\": 0,\n            \"cpuLimitMhz\": 0,\n            \"cpuUsedMhz\": 54000,\n            \"cpuReservedMhz\": 0,\n            \"memoryAllocationMB\": 0,\n            \"memoryLimitMB\": 0,\n            \"memoryUsedMB\": 47104,\n            \"memoryReservedMB\": 0,\n            \"storageLimitMB\": 0,\n            \"storageUsedMB\": 2262016,\n            \"providerVdcName\": null,\n            \"providerVdc\": null,\n            \"orgName\": \"sz101-1-1\",\n            \"numberOfVApps\": 11,\n            \"numberOfUnmanagedVApps\": 2,\n            \"numberOfMedia\": 0,\n            \"numberOfDisks\": 0,\n            \"numberOfVAppTemplates\": 0,\n            \"isBusy\": false,\n            \"status\": \"READY\",\n            \"numberOfDatastores\": null,\n            \"numberOfStorageProfiles\": 1,\n            \"numberOfVMs\": 17,\n            \"numberOfRunningVMs\": 9,\n            \"networkPoolUniversalId\": null,\n            \"numberOfDeployedVApps\": 4,\n            \"numberOfDeployedUnmanagedVApps\": 2,\n            \"isThinProvisioned\": null,\n            \"isFastProvisioned\": null,\n            \"isVgpuEnabled\": false\n        },\n        {\n            \"_type\": \"QueryResultOrgVdcRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/ca6f000b-84f0-4704-8a8a-e9f441508215\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"cpuOverheadMhz\": \"0\",\n                \"pvdcHardwareVersion\": \"15\",\n                \"taskStatusName\": \"vdcUpdateVdc\",\n                \"task\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/99c695d0-4432-448a-b07d-cdcae82ada32\",\n                \"allocationModel\": \"4\",\n                \"storageOverheadMB\": \"0\",\n                \"memoryOverheadMB\": \"0\",\n                \"taskStatus\": \"success\",\n                \"taskDetails\": \" \"\n            },\n            \"name\": \"FLEX\",\n            \"description\": null,\n            \"computeProviderScope\": null,\n            \"networkProviderScope\": null,\n            \"isEnabled\": true,\n            \"cpuAllocationMhz\": 0,\n            \"cpuLimitMhz\": 0,\n            \"cpuUsedMhz\": 0,\n            \"cpuReservedMhz\": 0,\n            \"memoryAllocationMB\": 0,\n            \"memoryLimitMB\": 0,\n            \"memoryUsedMB\": 0,\n            \"memoryReservedMB\": 0,\n            \"storageLimitMB\": 6144000,\n            \"storageUsedMB\": 0,\n            \"providerVdcName\": null,\n            \"providerVdc\": null,\n            \"orgName\": \"sz101-1-1\",\n            \"numberOfVApps\": 0,\n            \"numberOfUnmanagedVApps\": 0,\n            \"numberOfMedia\": 0,\n            \"numberOfDisks\": 0,\n            \"numberOfVAppTemplates\": 0,\n            \"isBusy\": false,\n            \"status\": \"READY\",\n            \"numberOfDatastores\": null,\n            \"numberOfStorageProfiles\": 1,\n            \"numberOfVMs\": 0,\n            \"numberOfRunningVMs\": 0,\n            \"networkPoolUniversalId\": null,\n            \"numberOfDeployedVApps\": 0,\n            \"numberOfDeployedUnmanagedVApps\": 0,\n            \"isThinProvisioned\": null,\n            \"isFastProvisioned\": null,\n            \"isVgpuEnabled\": false\n        }\n    ],\n    \"vCloudExtension\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "3. Get Sample VDC URN",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const id = responseJson.record[0].id;",
+									"",
+									"pm.environment.set(\"vdc_urn\", id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+json;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vcd_api_host}}/api/query?type=orgVdc&format=idrecords",
+							"protocol": "https",
+							"host": [
+								"{{vcd_api_host}}"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "orgVdc"
+								},
+								{
+									"key": "format",
+									"value": "idrecords"
+								}
+							]
+						},
+						"description": "Retrieve vdc's urn for getting VDC Compute Policy."
+					},
+					"response": [
+						{
+							"name": "3. Get Sample VDC URN",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+json;version={{vcd_api_version}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{vcd_api_host}}/api/query?type=orgVdc&format=idrecords",
+									"protocol": "https",
+									"host": [
+										"{{vcd_api_host}}"
+									],
+									"path": [
+										"api",
+										"query"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "orgVdc"
+										},
+										{
+											"key": "format",
+											"value": "idrecords"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.query.idrecords+json;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:13:01 GMT"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "46,46"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "6fa64fea-4329-4761-804b-b105e7dd51a9"
+								},
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"otherAttributes\": {},\n    \"link\": [\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=references\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=references\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=records\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.records+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=records\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.records+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        }\n    ],\n    \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdc&page=1&pageSize=25&format=idrecords\",\n    \"type\": \"application/vnd.vmware.vcloud.query.idrecords+json\",\n    \"name\": \"orgVdc\",\n    \"page\": 1,\n    \"pageSize\": 25,\n    \"total\": 2,\n    \"record\": [\n        {\n            \"_type\": \"QueryResultOrgVdcRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vdc:94d7b238-a1a5-45f8-a4a6-49b5bb368a3e\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"cpuOverheadMhz\": \"0\",\n                \"pvdcHardwareVersion\": \"15\",\n                \"taskStatusName\": \"vdcUpdateVdc\",\n                \"task\": \"urn:vcloud:task:85b9df1a-59d1-4fa3-a21f-a483064e5beb\",\n                \"allocationModel\": \"1\",\n                \"networkPool\": \"urn:vcloud:networkpool:81888d64-20ad-43ea-b6e4-b3527b44fb14\",\n                \"storageOverheadMB\": \"0\",\n                \"memoryOverheadMB\": \"616\",\n                \"taskStatus\": \"success\",\n                \"taskDetails\": \" \"\n            },\n            \"name\": \"sz101-1-1\",\n            \"description\": \"sz101-1-1\",\n            \"computeProviderScope\": null,\n            \"networkProviderScope\": null,\n            \"isEnabled\": true,\n            \"cpuAllocationMhz\": 0,\n            \"cpuLimitMhz\": 0,\n            \"cpuUsedMhz\": 54000,\n            \"cpuReservedMhz\": 0,\n            \"memoryAllocationMB\": 0,\n            \"memoryLimitMB\": 0,\n            \"memoryUsedMB\": 47104,\n            \"memoryReservedMB\": 0,\n            \"storageLimitMB\": 0,\n            \"storageUsedMB\": 2262016,\n            \"providerVdcName\": null,\n            \"providerVdc\": null,\n            \"orgName\": \"sz101-1-1\",\n            \"numberOfVApps\": 11,\n            \"numberOfUnmanagedVApps\": 2,\n            \"numberOfMedia\": 0,\n            \"numberOfDisks\": 0,\n            \"numberOfVAppTemplates\": 0,\n            \"isBusy\": false,\n            \"status\": \"READY\",\n            \"numberOfDatastores\": null,\n            \"numberOfStorageProfiles\": 1,\n            \"numberOfVMs\": 17,\n            \"numberOfRunningVMs\": 9,\n            \"networkPoolUniversalId\": null,\n            \"numberOfDeployedVApps\": 4,\n            \"numberOfDeployedUnmanagedVApps\": 2,\n            \"isThinProvisioned\": null,\n            \"isFastProvisioned\": null,\n            \"isVgpuEnabled\": false\n        },\n        {\n            \"_type\": \"QueryResultOrgVdcRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vdc:ca6f000b-84f0-4704-8a8a-e9f441508215\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"cpuOverheadMhz\": \"0\",\n                \"pvdcHardwareVersion\": \"15\",\n                \"taskStatusName\": \"vdcUpdateVdc\",\n                \"task\": \"urn:vcloud:task:99c695d0-4432-448a-b07d-cdcae82ada32\",\n                \"allocationModel\": \"4\",\n                \"storageOverheadMB\": \"0\",\n                \"memoryOverheadMB\": \"0\",\n                \"taskStatus\": \"success\",\n                \"taskDetails\": \" \"\n            },\n            \"name\": \"FLEX\",\n            \"description\": null,\n            \"computeProviderScope\": null,\n            \"networkProviderScope\": null,\n            \"isEnabled\": true,\n            \"cpuAllocationMhz\": 0,\n            \"cpuLimitMhz\": 0,\n            \"cpuUsedMhz\": 0,\n            \"cpuReservedMhz\": 0,\n            \"memoryAllocationMB\": 0,\n            \"memoryLimitMB\": 0,\n            \"memoryUsedMB\": 0,\n            \"memoryReservedMB\": 0,\n            \"storageLimitMB\": 6144000,\n            \"storageUsedMB\": 0,\n            \"providerVdcName\": null,\n            \"providerVdc\": null,\n            \"orgName\": \"sz101-1-1\",\n            \"numberOfVApps\": 0,\n            \"numberOfUnmanagedVApps\": 0,\n            \"numberOfMedia\": 0,\n            \"numberOfDisks\": 0,\n            \"numberOfVAppTemplates\": 0,\n            \"isBusy\": false,\n            \"status\": \"READY\",\n            \"numberOfDatastores\": null,\n            \"numberOfStorageProfiles\": 1,\n            \"numberOfVMs\": 0,\n            \"numberOfRunningVMs\": 0,\n            \"networkPoolUniversalId\": null,\n            \"numberOfDeployedVApps\": 0,\n            \"numberOfDeployedUnmanagedVApps\": 0,\n            \"isThinProvisioned\": null,\n            \"isFastProvisioned\": null,\n            \"isVgpuEnabled\": false\n        }\n    ],\n    \"vCloudExtension\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "4. Get Sample VDC Compute Policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const urn = responseJson.values[0].id;",
+									"",
+									"pm.environment.set(\"vdc_compute_policy_urn\", urn);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vcd_api_host}}/cloudapi/2.0.0/vdcs/{{vdc_urn}}/computePolicies",
+							"protocol": "https",
+							"host": [
+								"{{vcd_api_host}}"
+							],
+							"path": [
+								"cloudapi",
+								"2.0.0",
+								"vdcs",
+								"{{vdc_urn}}",
+								"computePolicies"
+							]
+						},
+						"description": "Retrieve the VDC Compute Policy based on VDC URN."
+					},
+					"response": [
+						{
+							"name": "4. Get Sample VDC Compute Policy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*;version={{vcd_api_version}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{vcd_api_host}}/cloudapi/2.0.0/vdcs/{{vdc_urn}}/computePolicies",
+									"protocol": "https",
+									"host": [
+										"{{vcd_api_host}}"
+									],
+									"path": [
+										"cloudapi",
+										"2.0.0",
+										"vdcs",
+										"{{vdc_urn}}",
+										"computePolicies"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "content-location",
+									"value": "https://api-vcd-sz101.testportal.up.australiacloud.com.au/cloudapi/2.0.0/vdcs/urn:vcloud:vdc:94d7b238-a1a5-45f8-a4a6-49b5bb368a3e/computePolicies"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:13:11 GMT"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "33"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "c39f20c4-a191-4b06-8735-4b04b46fcf8a"
+								},
+								{
+									"key": "content-length",
+									"value": "397"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"resultTotal\": 1,\n    \"pageCount\": 1,\n    \"page\": 1,\n    \"pageSize\": 25,\n    \"associations\": null,\n    \"values\": [\n        {\n            \"id\": \"urn:vcloud:vdcComputePolicy:e9a84023-57a8-4905-a46b-02ffe5acdfcf\",\n            \"description\": \"sz101-1-1AllocationVApp-DefaultPolicy\",\n            \"policyType\": \"VdcVmPolicy\",\n            \"name\": \"System Default\",\n            \"pvdcComputePolicy\": null,\n            \"compatibleVdcTypes\": null,\n            \"isSizingOnly\": true,\n            \"pvdcId\": null,\n            \"isAutoGenerated\": true,\n            \"vgpuProfiles\": null,\n            \"pvdcVgpuClustersMap\": null,\n            \"cpuSpeed\": null,\n            \"memory\": null,\n            \"cpuCount\": null,\n            \"coresPerSocket\": null,\n            \"memoryReservationGuarantee\": null,\n            \"cpuReservationGuarantee\": null,\n            \"cpuLimit\": null,\n            \"memoryLimit\": null,\n            \"cpuShares\": null,\n            \"memoryShares\": null,\n            \"extraConfigs\": null,\n            \"namedVmGroups\": null,\n            \"pvdcNamedVmGroupsMap\": null,\n            \"logicalVmGroupReferences\": null,\n            \"pvdcLogicalVmGroupsMap\": null,\n            \"isVgpuPolicy\": false\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "5. Get Sample Storage Profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const records = responseJson.record;",
+									"const vdc_url = pm.environment.get(\"vdc_url\");",
+									"",
+									"for(var i = 0; i < records.length; i++)",
+									"{",
+									"    if(records[i].vdc == vdc_url)",
+									"    {",
+									"        pm.environment.set(\"storage_profile_url\", records[i].href);",
+									"        break;",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+json;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vcd_api_host}}/api/query?type=orgVdcStorageProfile",
+							"protocol": "https",
+							"host": [
+								"{{vcd_api_host}}"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "orgVdcStorageProfile"
+								}
+							]
+						},
+						"description": "Retrieve the list of storage profile available in VCD."
+					},
+					"response": [
+						{
+							"name": "5. Get Sample Storage Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+json;version={{vcd_api_version}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{vcd_api_host}}/api/query?type=orgVdcStorageProfile",
+									"protocol": "https",
+									"host": [
+										"{{vcd_api_host}}"
+									],
+									"path": [
+										"api",
+										"query"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "orgVdcStorageProfile"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.query.records+json;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:13:29 GMT"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "71,71"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "f140d6e9-4c99-43ad-a899-791b0a9cb5d8"
+								},
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"otherAttributes\": {},\n    \"link\": [\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdcStorageProfile&page=1&pageSize=25&format=references\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdcStorageProfile&page=1&pageSize=25&format=references\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdcStorageProfile&page=1&pageSize=25&format=idrecords\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.idrecords+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdcStorageProfile&page=1&pageSize=25&format=idrecords\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.idrecords+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        }\n    ],\n    \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=orgVdcStorageProfile&page=1&pageSize=25&format=records\",\n    \"type\": \"application/vnd.vmware.vcloud.query.records+json\",\n    \"name\": \"orgVdcStorageProfile\",\n    \"page\": 1,\n    \"pageSize\": 25,\n    \"total\": 2,\n    \"record\": [\n        {\n            \"_type\": \"QueryResultOrgVdcStorageProfileRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdcStorageProfile/484eed09-97e1-4614-a1a1-92f35012fb28\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {},\n            \"name\": \"Basic-Any\",\n            \"isEnabled\": true,\n            \"isDefaultStorageProfile\": true,\n            \"storageUsedMB\": 2262016,\n            \"storageLimitMB\": 0,\n            \"iopsAllocated\": 0,\n            \"iopsLimit\": 0,\n            \"numberOfConditions\": 0,\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/94d7b238-a1a5-45f8-a4a6-49b5bb368a3e\",\n            \"vdcName\": \"sz101-1-1\",\n            \"isVdcBusy\": false,\n            \"diskIopsEnabled\": false,\n            \"diskIopsDefault\": 0,\n            \"diskIopsMax\": 0,\n            \"diskIopsPerGbMax\": 0,\n            \"ignoreIopsPlacement\": false,\n            \"numberOfCapabilities\": null,\n            \"inheritPvdcDefaultSettings\": true\n        },\n        {\n            \"_type\": \"QueryResultOrgVdcStorageProfileRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdcStorageProfile/dbe9872e-6dbe-4f65-a3da-204eb4b9bc07\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {},\n            \"name\": \"Basic-Any\",\n            \"isEnabled\": true,\n            \"isDefaultStorageProfile\": true,\n            \"storageUsedMB\": 0,\n            \"storageLimitMB\": 6144000,\n            \"iopsAllocated\": 0,\n            \"iopsLimit\": 0,\n            \"numberOfConditions\": 0,\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/ca6f000b-84f0-4704-8a8a-e9f441508215\",\n            \"vdcName\": \"FLEX\",\n            \"isVdcBusy\": false,\n            \"diskIopsEnabled\": false,\n            \"diskIopsDefault\": 0,\n            \"diskIopsMax\": 0,\n            \"diskIopsPerGbMax\": 0,\n            \"ignoreIopsPlacement\": false,\n            \"numberOfCapabilities\": null,\n            \"inheritPvdcDefaultSettings\": true\n        }\n    ],\n    \"vCloudExtension\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "6. Get Sample VApp Template URL & Name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const url = responseJson.record[0].href;",
+									"const name = responseJson.record[0].name;",
+									"",
+									"pm.environment.set(\"vapp_template_url\", url);",
+									"pm.environment.set(\"vapp_template_name\", name);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+json;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vcd_api_host}}/api/query?type=vm&filter=isVAppTemplate==true",
+							"protocol": "https",
+							"host": [
+								"{{vcd_api_host}}"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "vm"
+								},
+								{
+									"key": "filter",
+									"value": "isVAppTemplate==true"
+								}
+							]
+						},
+						"description": "Retrieve the VApp Template URL. This is used in payload in step 8."
+					},
+					"response": [
+						{
+							"name": "6. Get Sample VApp Template URL & Name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+json;version={{vcd_api_version}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{vcd_api_host}}/api/query?type=vm&filter=isVAppTemplate==true",
+									"protocol": "https",
+									"host": [
+										"{{vcd_api_host}}"
+									],
+									"path": [
+										"api",
+										"query"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "vm"
+										},
+										{
+											"key": "filter",
+											"value": "isVAppTemplate==true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.query.records+json;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:14:09 GMT"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "147,147"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "b64a7430-08dc-47fa-b271-d107466d74ba"
+								},
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"otherAttributes\": {},\n    \"link\": [\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=references&filter=isVAppTemplate==true\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=references&filter=isVAppTemplate==true\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=idrecords&filter=isVAppTemplate==true\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.idrecords+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=idrecords&filter=isVAppTemplate==true\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.idrecords+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        }\n    ],\n    \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=records&filter=isVAppTemplate==true\",\n    \"type\": \"application/vnd.vmware.vcloud.query.records+json\",\n    \"name\": \"vm\",\n    \"page\": 1,\n    \"pageSize\": 25,\n    \"total\": 10,\n    \"record\": [\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-075e9166-e140-4d1a-8b1e-6afda762a8f7\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11365\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Windows Server 2022 Std\",\n            \"containerName\": \"Windows Server 2022 Std\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-07322ccf-4108-44f8-8d26-b76149a25a0e\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \" \",\n            \"vappScopedLocalId\": \"Windows Server 2022 Std\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"detectedGuestOs\": null,\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedOld\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-06-17T05:07:50.238Z\",\n            \"totalStorageAllocatedMb\": 106496,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-09619666-4e1d-4731-8239-662a82c89f84\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11360\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Ubuntu20-Mini\",\n            \"containerName\": \"Ubuntu20-Mini\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-0268a88b-bd06-4f72-a855-c74d586ec69f\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Ubuntu20 Mini Patched Dec 2021\\n1 vCPUs, 2GB RAM, HD 10GB\\nusername : administrator\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Ubuntu20-Mini\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Ubuntu Linux (64-bit)\",\n            \"detectedGuestOs\": \"Ubuntu Linux (64-bit)\",\n            \"numberOfCpus\": 1,\n            \"memoryMB\": 2048,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T04:02:15.854Z\",\n            \"totalStorageAllocatedMb\": 12288,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-3c7254a8-8064-4e59-afa2-6cfb06fe31b9\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11269\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Ubuntu18-Small\",\n            \"containerName\": \"Ubuntu18-Small\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-6d89d4e2-e375-4966-ab46-37678e823ab3\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Ubuntu18 Small Patched Dec 2021\\n2 vCPUs, 4GB RAM, HD 50GB\\nusername : administrator\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Ubuntu18-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Ubuntu Linux (64-bit)\",\n            \"detectedGuestOs\": \"Ubuntu Linux (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T04:01:20.649Z\",\n            \"totalStorageAllocatedMb\": 55296,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-48f264fa-1172-41ee-ab5b-43aeacca43c1\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11365\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Win2K19-Small\",\n            \"containerName\": \"Win2K19-Small\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-571d80d1-d830-493e-8a94-f563d25299cb\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Win2K19-Small\\nWindows 2019 Server Small\\n2 vCPUs, 4GB RAM, HD 100GB\",\n            \"vappScopedLocalId\": \"Win2K19-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"detectedGuestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedOld\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-02-10T23:24:21.069Z\",\n            \"totalStorageAllocatedMb\": 106496,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-4f392f93-a60a-498c-8f1c-c37c6b49ff54\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11365\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Win2K16-Small\",\n            \"containerName\": \"Win2K16-Small\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-67c08f31-f9d9-4a04-a709-c9280421b48c\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Win2K16-Small\\nWindows 2016 Server Small\\n2 vCPUs, 4GB RAM, HD 100GB\",\n            \"vappScopedLocalId\": \"Win2K16-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"detectedGuestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedOld\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-02-24T03:46:13.565Z\",\n            \"totalStorageAllocatedMb\": 106496,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-6e78006b-7547-4db2-9aab-0e38b23e6c5f\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11269\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Centos7-Small\",\n            \"containerName\": \"Centos7-Small\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-09ddcc70-1de7-40ee-bdd9-f218b9075916\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Centos7 Small Patched Dec 2021\\n2 vCPUs, 4GB RAM, HD 50GB\\nusername : root\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Centos7-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"CentOS 7 (64-bit)\",\n            \"detectedGuestOs\": null,\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T03:59:17.994Z\",\n            \"totalStorageAllocatedMb\": 55296,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-9055f1b6-90d1-4549-960c-7c3c4b92a7ab\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11365\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Win2K22-Small\",\n            \"containerName\": \"Win2K22-Small\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-87e84626-ebfb-4ed3-a985-6cec4c29123a\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Win2K22-Small\\nWindows 2022 Server Small\\n2 vCPUs, 4GB RAM, HD 100GB\",\n            \"vappScopedLocalId\": \"Win2K22-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"detectedGuestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedOld\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-02-10T23:24:42.322Z\",\n            \"totalStorageAllocatedMb\": 106496,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-c2cf2ece-bcc0-43ec-9dad-f0a8a38e6239\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11269\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Centos7-Mini\",\n            \"containerName\": \"Centos7-Mini\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-92d2309c-7775-4306-aca0-d7cc4eeb8b81\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Centos7 Mini Patched Dec 2021\\n1 vCPUs, 2GB RAM, HD 10GB\\nusername : root\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Centos7-Mini\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"CentOS 7 (64-bit)\",\n            \"detectedGuestOs\": \"CentOS 7 (64-bit)\",\n            \"numberOfCpus\": 1,\n            \"memoryMB\": 2048,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T03:58:45.098Z\",\n            \"totalStorageAllocatedMb\": 12288,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-d568a659-c52c-4216-9896-9c82b7fdaad2\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11360\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Ubuntu20-Small\",\n            \"containerName\": \"Ubuntu20-Small\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-15917ebb-4778-4824-9794-51b888f0cf3c\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Ubuntu20 Small Patched Dec 2021\\n2 vCPUs, 4GB RAM, HD 50GB\\nusername : administrator\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Ubuntu20-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Ubuntu Linux (64-bit)\",\n            \"detectedGuestOs\": \"Ubuntu Linux (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T04:02:49.953Z\",\n            \"totalStorageAllocatedMb\": 55296,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vm-dd916a59-cb86-4b4c-b979-4a87aeea0429\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11269\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Ubuntu18-Mini\",\n            \"containerName\": \"Ubuntu18-Mini\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vAppTemplate/vappTemplate-b6e4a4bf-bf67-4ef9-9eaf-acd0c55c99dc\",\n            \"ownerName\": \"system\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Ubuntu18 Mini Patched Dec 2021\\n1 vCPUs, 2GB RAM, HD 10GB\\nusername : administrator\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Ubuntu18-Mini\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Ubuntu Linux (64-bit)\",\n            \"detectedGuestOs\": \"Ubuntu Linux (64-bit)\",\n            \"numberOfCpus\": 1,\n            \"memoryMB\": 2048,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T04:00:44.027Z\",\n            \"totalStorageAllocatedMb\": 12288,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        }\n    ],\n    \"vCloudExtension\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "7. Get Sample VApp Template URN",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const urn = responseJson.record[0].id;",
+									"",
+									"pm.environment.set(\"vapp_template_urn\", urn);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+json;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{vcd_api_host}}/api/query?type=vm&filter=isVAppTemplate==true&format=idrecords",
+							"protocol": "https",
+							"host": [
+								"{{vcd_api_host}}"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "vm"
+								},
+								{
+									"key": "filter",
+									"value": "isVAppTemplate==true"
+								},
+								{
+									"key": "format",
+									"value": "idrecords"
+								}
+							]
+						},
+						"description": "Retrieve the VApp Template URN. This is used in payload in step 8."
+					},
+					"response": [
+						{
+							"name": "7. Get Sample VApp Template URN",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+json;version={{vcd_api_version}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{vcd_api_host}}/api/query?type=vm&filter=isVAppTemplate==true&format=idrecords",
+									"protocol": "https",
+									"host": [
+										"{{vcd_api_host}}"
+									],
+									"path": [
+										"api",
+										"query"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "vm"
+										},
+										{
+											"key": "filter",
+											"value": "isVAppTemplate==true"
+										},
+										{
+											"key": "format",
+											"value": "idrecords"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.query.idrecords+json;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:14:17 GMT"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "191,191"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "22feb370-e0c0-4748-b295-0a0a24c6a2a2"
+								},
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"otherAttributes\": {},\n    \"link\": [\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=references&filter=isVAppTemplate==true\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=references&filter=isVAppTemplate==true\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=records&filter=isVAppTemplate==true\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.records+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=records&filter=isVAppTemplate==true\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.records+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        }\n    ],\n    \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=idrecords&filter=isVAppTemplate==true\",\n    \"type\": \"application/vnd.vmware.vcloud.query.idrecords+json\",\n    \"name\": \"vm\",\n    \"page\": 1,\n    \"pageSize\": 25,\n    \"total\": 10,\n    \"record\": [\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:075e9166-e140-4d1a-8b1e-6afda762a8f7\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11365\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Windows Server 2022 Std\",\n            \"containerName\": \"Windows Server 2022 Std\",\n            \"container\": \"urn:vcloud:vapptemplate:07322ccf-4108-44f8-8d26-b76149a25a0e\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \" \",\n            \"vappScopedLocalId\": \"Windows Server 2022 Std\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"detectedGuestOs\": null,\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedOld\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-06-17T05:07:50.238Z\",\n            \"totalStorageAllocatedMb\": 106496,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:09619666-4e1d-4731-8239-662a82c89f84\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11360\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Ubuntu20-Mini\",\n            \"containerName\": \"Ubuntu20-Mini\",\n            \"container\": \"urn:vcloud:vapptemplate:0268a88b-bd06-4f72-a855-c74d586ec69f\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Ubuntu20 Mini Patched Dec 2021\\n1 vCPUs, 2GB RAM, HD 10GB\\nusername : administrator\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Ubuntu20-Mini\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Ubuntu Linux (64-bit)\",\n            \"detectedGuestOs\": \"Ubuntu Linux (64-bit)\",\n            \"numberOfCpus\": 1,\n            \"memoryMB\": 2048,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T04:02:15.854Z\",\n            \"totalStorageAllocatedMb\": 12288,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:3c7254a8-8064-4e59-afa2-6cfb06fe31b9\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11269\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Ubuntu18-Small\",\n            \"containerName\": \"Ubuntu18-Small\",\n            \"container\": \"urn:vcloud:vapptemplate:6d89d4e2-e375-4966-ab46-37678e823ab3\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Ubuntu18 Small Patched Dec 2021\\n2 vCPUs, 4GB RAM, HD 50GB\\nusername : administrator\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Ubuntu18-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Ubuntu Linux (64-bit)\",\n            \"detectedGuestOs\": \"Ubuntu Linux (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T04:01:20.649Z\",\n            \"totalStorageAllocatedMb\": 55296,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:48f264fa-1172-41ee-ab5b-43aeacca43c1\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11365\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Win2K19-Small\",\n            \"containerName\": \"Win2K19-Small\",\n            \"container\": \"urn:vcloud:vapptemplate:571d80d1-d830-493e-8a94-f563d25299cb\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Win2K19-Small\\nWindows 2019 Server Small\\n2 vCPUs, 4GB RAM, HD 100GB\",\n            \"vappScopedLocalId\": \"Win2K19-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"detectedGuestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedOld\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-02-10T23:24:21.069Z\",\n            \"totalStorageAllocatedMb\": 106496,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:4f392f93-a60a-498c-8f1c-c37c6b49ff54\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11365\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Win2K16-Small\",\n            \"containerName\": \"Win2K16-Small\",\n            \"container\": \"urn:vcloud:vapptemplate:67c08f31-f9d9-4a04-a709-c9280421b48c\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Win2K16-Small\\nWindows 2016 Server Small\\n2 vCPUs, 4GB RAM, HD 100GB\",\n            \"vappScopedLocalId\": \"Win2K16-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"detectedGuestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedOld\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-02-24T03:46:13.565Z\",\n            \"totalStorageAllocatedMb\": 106496,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:6e78006b-7547-4db2-9aab-0e38b23e6c5f\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11269\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Centos7-Small\",\n            \"containerName\": \"Centos7-Small\",\n            \"container\": \"urn:vcloud:vapptemplate:09ddcc70-1de7-40ee-bdd9-f218b9075916\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Centos7 Small Patched Dec 2021\\n2 vCPUs, 4GB RAM, HD 50GB\\nusername : root\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Centos7-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"CentOS 7 (64-bit)\",\n            \"detectedGuestOs\": null,\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T03:59:17.994Z\",\n            \"totalStorageAllocatedMb\": 55296,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:9055f1b6-90d1-4549-960c-7c3c4b92a7ab\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11365\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Win2K22-Small\",\n            \"containerName\": \"Win2K22-Small\",\n            \"container\": \"urn:vcloud:vapptemplate:87e84626-ebfb-4ed3-a985-6cec4c29123a\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Win2K22-Small\\nWindows 2022 Server Small\\n2 vCPUs, 4GB RAM, HD 100GB\",\n            \"vappScopedLocalId\": \"Win2K22-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"detectedGuestOs\": \"Microsoft Windows Server 2016 or later (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedOld\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-02-10T23:24:42.322Z\",\n            \"totalStorageAllocatedMb\": 106496,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:c2cf2ece-bcc0-43ec-9dad-f0a8a38e6239\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11269\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Centos7-Mini\",\n            \"containerName\": \"Centos7-Mini\",\n            \"container\": \"urn:vcloud:vapptemplate:92d2309c-7775-4306-aca0-d7cc4eeb8b81\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Centos7 Mini Patched Dec 2021\\n1 vCPUs, 2GB RAM, HD 10GB\\nusername : root\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Centos7-Mini\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"CentOS 7 (64-bit)\",\n            \"detectedGuestOs\": \"CentOS 7 (64-bit)\",\n            \"numberOfCpus\": 1,\n            \"memoryMB\": 2048,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T03:58:45.098Z\",\n            \"totalStorageAllocatedMb\": 12288,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:d568a659-c52c-4216-9896-9c82b7fdaad2\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11360\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Ubuntu20-Small\",\n            \"containerName\": \"Ubuntu20-Small\",\n            \"container\": \"urn:vcloud:vapptemplate:15917ebb-4778-4824-9794-51b888f0cf3c\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Ubuntu20 Small Patched Dec 2021\\n2 vCPUs, 4GB RAM, HD 50GB\\nusername : administrator\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Ubuntu20-Small\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Ubuntu Linux (64-bit)\",\n            \"detectedGuestOs\": \"Ubuntu Linux (64-bit)\",\n            \"numberOfCpus\": 2,\n            \"memoryMB\": 4096,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T04:02:49.953Z\",\n            \"totalStorageAllocatedMb\": 55296,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        },\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": null,\n            \"id\": \"urn:vcloud:vm:dd916a59-cb86-4b4c-b979-4a87aeea0429\",\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"11269\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Ubuntu18-Mini\",\n            \"containerName\": \"Ubuntu18-Mini\",\n            \"container\": \"urn:vcloud:vapptemplate:b6e4a4bf-bf67-4ef9-9eaf-acd0c55c99dc\",\n            \"ownerName\": \"system\",\n            \"owner\": \"urn:vcloud:user:6031f6a3-a2ad-446f-8023-3567d3090036\",\n            \"vdcName\": \"AUCloud Catalog VDC\",\n            \"vdc\": \"urn:vcloud:vdc:6494c4dc-1a12-4024-9d2b-6c40ccda0944\",\n            \"description\": \"Ubuntu18 Mini Patched Dec 2021\\n1 vCPUs, 2GB RAM, HD 10GB\\nusername : administrator\\npassword : Ch4ngeP\\\"ssw0rd\",\n            \"vappScopedLocalId\": \"Ubuntu18-Mini\",\n            \"isVAppTemplate\": true,\n            \"isDeleted\": false,\n            \"guestOs\": \"Ubuntu Linux (64-bit)\",\n            \"detectedGuestOs\": \"Ubuntu Linux (64-bit)\",\n            \"numberOfCpus\": 1,\n            \"memoryMB\": 2048,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": true,\n            \"catalogName\": \"AUCloud Standard Templates and ISOs\",\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsSupportedNew\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": false,\n            \"storageProfileName\": \"*\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"25fc837e-7d5c-4ff3-9ad8-d07e426a8171\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2021-12-10T04:00:44.027Z\",\n            \"totalStorageAllocatedMb\": 12288,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        }\n    ],\n    \"vCloudExtension\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "8. Create VM From Template",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"vm_name\", \"Vm-\" + pm.variables.replaceIn('{{$randomFirstName}}'));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+xml;version={{vcd_api_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/*+xml;charset=UTF-8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<root:InstantiateVmTemplateParams\n\txmlns:root=\"http://www.vmware.com/vcloud/v1.5\"\n\txmlns:ns0=\"http://schemas.dmtf.org/ovf/envelope/1\" name=\"{{vm_name}}\" powerOn=\"{{vm_power_on}}\">\n\t<root:Description/>\n\t<root:SourcedVmTemplateItem>\n\t\t<root:Source href=\"{{vapp_template_url}}\" id=\"{{vapp_template_urn}}\" name=\"{{vapp_template_name}}\" type=\"application/vnd.vmware.vcloud.vm+xml\"/>\n\t\t<root:VmTemplateInstantiationParams>\n\t\t\t<root:NetworkConnectionSection>\n\t\t\t\t<ns0:Info/>\n\t\t\t\t<root:PrimaryNetworkConnectionIndex>0</root:PrimaryNetworkConnectionIndex>\n\t\t\t\t<root:NetworkConnection network=\"none\">\n\t\t\t\t\t<root:NetworkConnectionIndex>0</root:NetworkConnectionIndex>\n\t\t\t\t\t<root:IsConnected>false</root:IsConnected>\n\t\t\t\t\t<root:IpAddressAllocationMode>NONE</root:IpAddressAllocationMode>\n\t\t\t\t\t<root:NetworkAdapterType>VMXNET3</root:NetworkAdapterType>\n\t\t\t\t</root:NetworkConnection>\n\t\t\t</root:NetworkConnectionSection>\n\t\t\t<root:GuestCustomizationSection>\n\t\t\t\t<ns0:Info>Specifies Guest OS Customization Settings</ns0:Info>\n\t\t\t\t<root:Enabled>true</root:Enabled>\n\t\t\t\t<root:ChangeSid>false</root:ChangeSid>\n\t\t\t\t<root:JoinDomainEnabled>false</root:JoinDomainEnabled>\n\t\t\t\t<root:UseOrgSettings>false</root:UseOrgSettings>\n\t\t\t\t<root:AdminPasswordEnabled>false</root:AdminPasswordEnabled>\n\t\t\t\t<root:AdminPasswordAuto>true</root:AdminPasswordAuto>\n\t\t\t\t<root:AdminAutoLogonEnabled>false</root:AdminAutoLogonEnabled>\n\t\t\t\t<root:AdminAutoLogonCount>0</root:AdminAutoLogonCount>\n\t\t\t\t<root:ResetPasswordRequired>false</root:ResetPasswordRequired>\n\t\t\t\t<root:ComputerName>{{vm_name}}</root:ComputerName>\n\t\t\t</root:GuestCustomizationSection>\n\t\t</root:VmTemplateInstantiationParams>\n\t\t<root:StorageProfile href=\"{{storage_profile_url}}\"/>\n\t</root:SourcedVmTemplateItem>\n\t<root:AllEULAsAccepted>true</root:AllEULAsAccepted>\n\t<root:ComputePolicy>\n\t\t<root:VmSizingPolicy href=\"{{vdc_compute_policy_urn}}\" id=\"{{vdc_compute_policy_urn}}\"/>\n\t</root:ComputePolicy>\n</root:InstantiateVmTemplateParams>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vdc_url}}/action/instantiateVmFromTemplate",
+							"host": [
+								"{{vdc_url}}"
+							],
+							"path": [
+								"action",
+								"instantiateVmFromTemplate"
+							]
+						},
+						"description": "Create a new VM from the VApp template that been retrieved in a previous step."
+					},
+					"response": [
+						{
+							"name": "8. Create VM From Template",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+xml;version={{vcd_api_version}}",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/*+xml;charset=UTF-8",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<root:InstantiateVmTemplateParams\n\txmlns:root=\"http://www.vmware.com/vcloud/v1.5\"\n\txmlns:ns0=\"http://schemas.dmtf.org/ovf/envelope/1\" name=\"{{vm_name}}\" powerOn=\"{{vm_power_on}}\">\n\t<root:Description/>\n\t<root:SourcedVmTemplateItem>\n\t\t<root:Source href=\"{{vapp_template_url}}\" id=\"{{vapp_template_urn}}\" name=\"{{vapp_template_name}}\" type=\"application/vnd.vmware.vcloud.vm+xml\"/>\n\t\t<root:VmTemplateInstantiationParams>\n\t\t\t<root:NetworkConnectionSection>\n\t\t\t\t<ns0:Info/>\n\t\t\t\t<root:PrimaryNetworkConnectionIndex>0</root:PrimaryNetworkConnectionIndex>\n\t\t\t\t<root:NetworkConnection network=\"none\">\n\t\t\t\t\t<root:NetworkConnectionIndex>0</root:NetworkConnectionIndex>\n\t\t\t\t\t<root:IsConnected>false</root:IsConnected>\n\t\t\t\t\t<root:IpAddressAllocationMode>NONE</root:IpAddressAllocationMode>\n\t\t\t\t\t<root:NetworkAdapterType>VMXNET3</root:NetworkAdapterType>\n\t\t\t\t</root:NetworkConnection>\n\t\t\t</root:NetworkConnectionSection>\n\t\t\t<root:GuestCustomizationSection>\n\t\t\t\t<ns0:Info>Specifies Guest OS Customization Settings</ns0:Info>\n\t\t\t\t<root:Enabled>true</root:Enabled>\n\t\t\t\t<root:ChangeSid>false</root:ChangeSid>\n\t\t\t\t<root:JoinDomainEnabled>false</root:JoinDomainEnabled>\n\t\t\t\t<root:UseOrgSettings>false</root:UseOrgSettings>\n\t\t\t\t<root:AdminPasswordEnabled>false</root:AdminPasswordEnabled>\n\t\t\t\t<root:AdminPasswordAuto>true</root:AdminPasswordAuto>\n\t\t\t\t<root:AdminAutoLogonEnabled>false</root:AdminAutoLogonEnabled>\n\t\t\t\t<root:AdminAutoLogonCount>0</root:AdminAutoLogonCount>\n\t\t\t\t<root:ResetPasswordRequired>false</root:ResetPasswordRequired>\n\t\t\t\t<root:ComputerName>{{vm_name}}</root:ComputerName>\n\t\t\t</root:GuestCustomizationSection>\n\t\t</root:VmTemplateInstantiationParams>\n\t\t<root:StorageProfile href=\"{{storage_profile_url}}\"/>\n\t</root:SourcedVmTemplateItem>\n\t<root:AllEULAsAccepted>true</root:AllEULAsAccepted>\n\t<root:ComputePolicy>\n\t\t<root:VmSizingPolicy href=\"{{vdc_compute_policy_urn}}\" id=\"{{vdc_compute_policy_urn}}\"/>\n\t</root:ComputePolicy>\n</root:InstantiateVmTemplateParams>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{vdc_url}}/action/instantiateVmFromTemplate",
+									"host": [
+										"{{vdc_url}}"
+									],
+									"path": [
+										"action",
+										"instantiateVmFromTemplate"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.task+xml;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:14:24 GMT"
+								},
+								{
+									"key": "location",
+									"value": "https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/2d75718c-9f75-4b7e-838f-1508e00c9d62"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "675,675"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "2b5a1bbb-1fa4-4db9-b247-03b09d865417"
+								},
+								{
+									"key": "content-length",
+									"value": "1987"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Task xmlns=\"http://www.vmware.com/vcloud/v1.5\" xmlns:vmext=\"http://www.vmware.com/vcloud/extension/v1.5\" xmlns:ovf=\"http://schemas.dmtf.org/ovf/envelope/1\" xmlns:vssd=\"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData\" xmlns:common=\"http://schemas.dmtf.org/wbem/wscim/1/common\" xmlns:rasd=\"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData\" xmlns:vmw=\"http://www.vmware.com/schema/ovf\" xmlns:ovfenv=\"http://schemas.dmtf.org/ovf/environment/1\" xmlns:ns9=\"http://www.vmware.com/vcloud/versions\" status=\"queued\" operation=\"Composing Virtual Application Vm-Jayda-9c86b918-d096-4106-9818-9cb0c9935108(eea8b783-fead-4723-a944-fa84a7fad13c)\" operationName=\"vdcComposeVapp\" serviceNamespace=\"com.vmware.vcloud\" startTime=\"2022-07-10T23:14:24.674Z\" expiryTime=\"2022-11-07T23:14:24.674Z\" cancelRequested=\"false\" name=\"task\" id=\"urn:vcloud:task:2d75718c-9f75-4b7e-838f-1508e00c9d62\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/2d75718c-9f75-4b7e-838f-1508e00c9d62\" type=\"application/vnd.vmware.vcloud.task+xml\">\n    <Owner href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vApp/vapp-eea8b783-fead-4723-a944-fa84a7fad13c\" id=\"urn:vcloud:vapp:eea8b783-fead-4723-a944-fa84a7fad13c\" type=\"application/vnd.vmware.vcloud.vApp+xml\" name=\"Vm-Jayda-9c86b918-d096-4106-9818-9cb0c9935108\"/>\n    <User href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/80af3db2-a3c1-49bd-867e-e60cf840ac26\" id=\"urn:vcloud:user:80af3db2-a3c1-49bd-867e-e60cf840ac26\" type=\"application/vnd.vmware.admin.user+xml\" name=\"8.1\"/>\n    <Organization href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/org/54184042-7d63-41a2-be62-14a5337ad41c\" id=\"urn:vcloud:org:54184042-7d63-41a2-be62-14a5337ad41c\" type=\"application/vnd.vmware.vcloud.org+xml\" name=\"sz101-1-1\"/>\n    <Progress>1</Progress>\n    <Details></Details>\n</Task>"
+						}
+					]
+				},
+				{
+					"name": "8. Create VM From Scratch",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"vm_name\", \"Vm-\" + pm.variables.replaceIn('{{$randomFirstName}}'));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+xml;version={{vcd_api_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/*+xml;charset=UTF-8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<root:CreateVmParams\n\txmlns:root=\"http://www.vmware.com/vcloud/v1.5\"\n\txmlns:ns0=\"http://schemas.dmtf.org/ovf/envelope/1\" powerOn=\"{{vm_power_on}}\">\n\t<root:Description/>\n\t<root:CreateVm name=\"{{vm_name}}\">\n\t\t<root:GuestCustomizationSection>\n\t\t\t<ns0:Info>Specifies Guest OS Customization Settings</ns0:Info>\n\t\t\t<root:ComputerName>{{vm_name}}</root:ComputerName>\n\t\t</root:GuestCustomizationSection>\n\t\t<root:NetworkConnectionSection>\n\t\t\t<ns0:Info>Network Configuration for VM</ns0:Info>\n\t\t\t<root:PrimaryNetworkConnectionIndex>0</root:PrimaryNetworkConnectionIndex>\n\t\t\t<root:NetworkConnection network=\"none\">\n\t\t\t\t<root:NetworkConnectionIndex>0</root:NetworkConnectionIndex>\n\t\t\t\t<root:IpAddress>any</root:IpAddress>\n\t\t\t\t<root:IsConnected>true</root:IsConnected>\n\t\t\t\t<root:IpAddressAllocationMode>NONE</root:IpAddressAllocationMode>\n\t\t\t\t<root:NetworkAdapterType>VMXNET3</root:NetworkAdapterType>\n\t\t\t</root:NetworkConnection>\n\t\t</root:NetworkConnectionSection>\n\t\t<root:VmSpecSection Modified=\"true\">\n\t\t\t<ns0:Info>Virtual Machine specification</ns0:Info>\n\t\t\t<root:OsType>centos8_64Guest</root:OsType>\n\t\t\t<root:NumCpus>1</root:NumCpus>\n\t\t\t<root:NumCoresPerSocket>1</root:NumCoresPerSocket>\n\t\t\t<root:CpuResourceMhz>\n\t\t\t\t<root:Configured>0</root:Configured>\n\t\t\t</root:CpuResourceMhz>\n\t\t\t<root:MemoryResourceMb>\n\t\t\t\t<root:Configured>1024</root:Configured>\n\t\t\t</root:MemoryResourceMb>\n\t\t\t<root:DiskSection>\n\t\t\t\t<root:DiskSettings>\n\t\t\t\t\t<root:SizeMb>16384</root:SizeMb>\n\t\t\t\t\t<root:UnitNumber>0</root:UnitNumber>\n\t\t\t\t\t<root:BusNumber>0</root:BusNumber>\n\t\t\t\t\t<root:AdapterType>5</root:AdapterType>\n\t\t\t\t\t<root:ThinProvisioned>true</root:ThinProvisioned>\n\t\t\t\t\t<root:overrideVmDefault>false</root:overrideVmDefault>\n\t\t\t\t</root:DiskSettings>\n\t\t\t</root:DiskSection>\n\t\t\t<root:HardwareVersion>vmx-15</root:HardwareVersion>\n\t\t\t<root:VirtualCpuType>VM64</root:VirtualCpuType>\n\t\t</root:VmSpecSection>\n\t\t<root:ComputePolicy>\n\t\t\t<root:VmSizingPolicy href=\"{{vdc_compute_policy_urn}}\"/>\n\t\t</root:ComputePolicy>\n\t</root:CreateVm>\n</root:CreateVmParams>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vdc_url}}/action/createVm",
+							"host": [
+								"{{vdc_url}}"
+							],
+							"path": [
+								"action",
+								"createVm"
+							]
+						},
+						"description": "Create a new VM from scratch."
+					},
+					"response": [
+						{
+							"name": "8. Create VM From Scratch",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+xml;version={{vcd_api_version}}",
+										"type": "default"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/*+xml;charset=UTF-8",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<root:CreateVmParams\n\txmlns:root=\"http://www.vmware.com/vcloud/v1.5\"\n\txmlns:ns0=\"http://schemas.dmtf.org/ovf/envelope/1\" powerOn=\"{{vm_power_on}}\">\n\t<root:Description/>\n\t<root:CreateVm name=\"{{vm_name}}\">\n\t\t<root:GuestCustomizationSection>\n\t\t\t<ns0:Info>Specifies Guest OS Customization Settings</ns0:Info>\n\t\t\t<root:ComputerName>{{vm_name}}</root:ComputerName>\n\t\t</root:GuestCustomizationSection>\n\t\t<root:NetworkConnectionSection>\n\t\t\t<ns0:Info>Network Configuration for VM</ns0:Info>\n\t\t\t<root:PrimaryNetworkConnectionIndex>0</root:PrimaryNetworkConnectionIndex>\n\t\t\t<root:NetworkConnection network=\"none\">\n\t\t\t\t<root:NetworkConnectionIndex>0</root:NetworkConnectionIndex>\n\t\t\t\t<root:IpAddress>any</root:IpAddress>\n\t\t\t\t<root:IsConnected>true</root:IsConnected>\n\t\t\t\t<root:IpAddressAllocationMode>NONE</root:IpAddressAllocationMode>\n\t\t\t\t<root:NetworkAdapterType>VMXNET3</root:NetworkAdapterType>\n\t\t\t</root:NetworkConnection>\n\t\t</root:NetworkConnectionSection>\n\t\t<root:VmSpecSection Modified=\"true\">\n\t\t\t<ns0:Info>Virtual Machine specification</ns0:Info>\n\t\t\t<root:OsType>centos8_64Guest</root:OsType>\n\t\t\t<root:NumCpus>1</root:NumCpus>\n\t\t\t<root:NumCoresPerSocket>1</root:NumCoresPerSocket>\n\t\t\t<root:CpuResourceMhz>\n\t\t\t\t<root:Configured>0</root:Configured>\n\t\t\t</root:CpuResourceMhz>\n\t\t\t<root:MemoryResourceMb>\n\t\t\t\t<root:Configured>1024</root:Configured>\n\t\t\t</root:MemoryResourceMb>\n\t\t\t<root:DiskSection>\n\t\t\t\t<root:DiskSettings>\n\t\t\t\t\t<root:SizeMb>16384</root:SizeMb>\n\t\t\t\t\t<root:UnitNumber>0</root:UnitNumber>\n\t\t\t\t\t<root:BusNumber>0</root:BusNumber>\n\t\t\t\t\t<root:AdapterType>5</root:AdapterType>\n\t\t\t\t\t<root:ThinProvisioned>true</root:ThinProvisioned>\n\t\t\t\t\t<root:overrideVmDefault>false</root:overrideVmDefault>\n\t\t\t\t</root:DiskSettings>\n\t\t\t</root:DiskSection>\n\t\t\t<root:HardwareVersion>vmx-15</root:HardwareVersion>\n\t\t\t<root:VirtualCpuType>VM64</root:VirtualCpuType>\n\t\t</root:VmSpecSection>\n\t\t<root:ComputePolicy>\n\t\t\t<root:VmSizingPolicy href=\"{{vdc_compute_policy_urn}}\"/>\n\t\t</root:ComputePolicy>\n\t</root:CreateVm>\n</root:CreateVmParams>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{vdc_url}}/action/createVm",
+									"host": [
+										"{{vdc_url}}"
+									],
+									"path": [
+										"action",
+										"createVm"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.task+xml;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:14:31 GMT"
+								},
+								{
+									"key": "location",
+									"value": "https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/d27119be-fdd1-4ae2-8417-329b7115b646"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "262,262"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "7a37554b-961f-4dbd-91d5-30edb5984cac"
+								},
+								{
+									"key": "content-length",
+									"value": "1985"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Task xmlns=\"http://www.vmware.com/vcloud/v1.5\" xmlns:vmext=\"http://www.vmware.com/vcloud/extension/v1.5\" xmlns:ovf=\"http://schemas.dmtf.org/ovf/envelope/1\" xmlns:vssd=\"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData\" xmlns:common=\"http://schemas.dmtf.org/wbem/wscim/1/common\" xmlns:rasd=\"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData\" xmlns:vmw=\"http://www.vmware.com/schema/ovf\" xmlns:ovfenv=\"http://schemas.dmtf.org/ovf/environment/1\" xmlns:ns9=\"http://www.vmware.com/vcloud/versions\" status=\"queued\" operation=\"Composing Virtual Application Vm-Lane-80a17ac2-60c5-4aa3-ba1e-52ea43fa7f55(2a8f22ab-2eae-47e9-90e6-9af414d0927d)\" operationName=\"vdcComposeVapp\" serviceNamespace=\"com.vmware.vcloud\" startTime=\"2022-07-10T23:14:30.956Z\" expiryTime=\"2022-11-07T23:14:30.956Z\" cancelRequested=\"false\" name=\"task\" id=\"urn:vcloud:task:d27119be-fdd1-4ae2-8417-329b7115b646\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/d27119be-fdd1-4ae2-8417-329b7115b646\" type=\"application/vnd.vmware.vcloud.task+xml\">\n    <Owner href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vApp/vapp-2a8f22ab-2eae-47e9-90e6-9af414d0927d\" id=\"urn:vcloud:vapp:2a8f22ab-2eae-47e9-90e6-9af414d0927d\" type=\"application/vnd.vmware.vcloud.vApp+xml\" name=\"Vm-Lane-80a17ac2-60c5-4aa3-ba1e-52ea43fa7f55\"/>\n    <User href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/80af3db2-a3c1-49bd-867e-e60cf840ac26\" id=\"urn:vcloud:user:80af3db2-a3c1-49bd-867e-e60cf840ac26\" type=\"application/vnd.vmware.admin.user+xml\" name=\"8.1\"/>\n    <Organization href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/org/54184042-7d63-41a2-be62-14a5337ad41c\" id=\"urn:vcloud:org:54184042-7d63-41a2-be62-14a5337ad41c\" type=\"application/vnd.vmware.vcloud.org+xml\" name=\"sz101-1-1\"/>\n    <Progress>1</Progress>\n    <Details></Details>\n</Task>"
+						}
+					]
+				}
+			],
+			"description": "This folder demonstrates of how you can use vCD API to create a new VM step by step."
+		},
+		{
+			"name": "Delete VM",
+			"item": [
+				{
+					"name": "2. Get VM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const url = responseJson.record[0].href;",
+									"const status = responseJson.record[0].status;",
+									"",
+									"pm.environment.set(\"vm_url\", url);",
+									"pm.environment.set(\"vm_status\", status);",
+									"",
+									"if (status == \"POWERED_ON\") {",
+									"    postman.setNextRequest(\"3. Turn Off VM\");",
+									"}",
+									"else if (status == \"POWERED_OFF\") {",
+									"    postman.setNextRequest(\"4. Delete VM\");",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+json;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://{{vcd_api_host}}/api/query?type=vm&filter=name=={{vm_name}}",
+							"protocol": "https",
+							"host": [
+								"{{vcd_api_host}}"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "vm"
+								},
+								{
+									"key": "filter",
+									"value": "name=={{vm_name}}"
+								}
+							]
+						},
+						"description": "Get the VM information."
+					},
+					"response": [
+						{
+							"name": "2. Get VM",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+json;version={{vcd_api_version}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "https://{{vcd_api_host}}/api/query?type=vm&filter=name=={{vm_name}}",
+									"protocol": "https",
+									"host": [
+										"{{vcd_api_host}}"
+									],
+									"path": [
+										"api",
+										"query"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "vm"
+										},
+										{
+											"key": "filter",
+											"value": "name=={{vm_name}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.query.records+json;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 10 Jul 2022 23:59:20 GMT"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "90,90"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "1ac073b6-b4dd-41ea-9135-3931008cdebd"
+								},
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"otherAttributes\": {},\n    \"link\": [\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=references&filter=name==Vm-Lane\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=references&filter=name==Vm-Lane\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.references+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=idrecords&filter=name==Vm-Lane\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.idrecords+xml\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        },\n        {\n            \"otherAttributes\": {},\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=idrecords&filter=name==Vm-Lane\",\n            \"id\": null,\n            \"type\": \"application/vnd.vmware.vcloud.query.idrecords+json\",\n            \"name\": null,\n            \"rel\": \"alternate\",\n            \"model\": null,\n            \"vCloudExtension\": []\n        }\n    ],\n    \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/query?type=vm&page=1&pageSize=25&format=records&filter=name==Vm-Lane\",\n    \"type\": \"application/vnd.vmware.vcloud.query.records+json\",\n    \"name\": \"vm\",\n    \"page\": 1,\n    \"pageSize\": 25,\n    \"total\": 1,\n    \"record\": [\n        {\n            \"_type\": \"QueryResultVMRecordType\",\n            \"link\": [],\n            \"metadata\": null,\n            \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vApp/vm-e943f301-438d-43f0-81e6-d425c3b51954\",\n            \"id\": null,\n            \"type\": null,\n            \"otherAttributes\": {\n                \"vmToolsVersion\": \"0\",\n                \"isVdcEnabled\": \"true\",\n                \"pvdcHighestSupportedHardwareVersion\": \"15\"\n            },\n            \"name\": \"Vm-Lane\",\n            \"containerName\": \"Vm-Lane-80a17ac2-60c5-4aa3-ba1e-52ea43fa7f55\",\n            \"container\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vApp/vapp-2a8f22ab-2eae-47e9-90e6-9af414d0927d\",\n            \"ownerName\": \"8.1\",\n            \"owner\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/80af3db2-a3c1-49bd-867e-e60cf840ac26\",\n            \"vdcName\": \"sz101-1-1\",\n            \"vdc\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vdc/94d7b238-a1a5-45f8-a4a6-49b5bb368a3e\",\n            \"description\": \" \",\n            \"vappScopedLocalId\": \"fce518df-0361-46a1-abb6-6499ac8b858f\",\n            \"isVAppTemplate\": false,\n            \"isDeleted\": false,\n            \"guestOs\": \"CentOS 8 (64-bit)\",\n            \"detectedGuestOs\": null,\n            \"numberOfCpus\": 1,\n            \"memoryMB\": 1024,\n            \"status\": \"POWERED_OFF\",\n            \"networkName\": null,\n            \"network\": null,\n            \"ipAddress\": null,\n            \"isBusy\": false,\n            \"isDeployed\": false,\n            \"isPublished\": false,\n            \"catalogName\": null,\n            \"hardwareVersion\": 15,\n            \"vmToolsStatus\": \"guestToolsNotInstalled\",\n            \"isInMaintenanceMode\": false,\n            \"isAutoNature\": true,\n            \"storageProfileName\": \"Basic-Any\",\n            \"snapshot\": false,\n            \"snapshotCreated\": null,\n            \"gcStatus\": \"GC_PENDING\",\n            \"autoUndeployDate\": null,\n            \"autoDeleteDate\": null,\n            \"isAutoUndeployNotified\": false,\n            \"isAutoDeleteNotified\": false,\n            \"isComputePolicyCompliant\": true,\n            \"vmSizingPolicyId\": \"e9a84023-57a8-4905-a46b-02ffe5acdfcf\",\n            \"vmPlacementPolicyId\": null,\n            \"encrypted\": null,\n            \"dateCreated\": \"2022-07-10T23:14:33.209Z\",\n            \"totalStorageAllocatedMb\": 17408,\n            \"isExpired\": false,\n            \"defaultStoragePolicyName\": null,\n            \"hasVgpuPolicy\": false\n        }\n    ],\n    \"vCloudExtension\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "3. Turn Off VM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});",
+									"",
+									"setTimeout(function(){",
+									"    console.log(\"Waiting for turning off VM completely\");",
+									"}, 6000);",
+									"",
+									"pm.environment.set(\"vm_status\", \"POWERED_OFF\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*+json;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{vm_url}}/power/action/powerOff",
+							"host": [
+								"{{vm_url}}"
+							],
+							"path": [
+								"power",
+								"action",
+								"powerOff"
+							]
+						},
+						"description": "Turn off the VM in case its status is POWERED_ON."
+					},
+					"response": [
+						{
+							"name": "3. Turn Off VM",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*+json;version={{vcd_api_version}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{vm_url}}/power/action/powerOff",
+									"host": [
+										"{{vm_url}}"
+									],
+									"path": [
+										"power",
+										"action",
+										"powerOff"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.task+json;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 11 Jul 2022 00:00:49 GMT"
+								},
+								{
+									"key": "location",
+									"value": "https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/29f70406-6c95-4490-b37d-1bc52f74f75a"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding, User-Agent"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "109,109"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "6600a0de-5622-43d0-b22c-878bd302e37f"
+								},
+								{
+									"key": "content-length",
+									"value": "1883"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"otherAttributes\": {},\n    \"link\": [],\n    \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/29f70406-6c95-4490-b37d-1bc52f74f75a\",\n    \"type\": \"application/vnd.vmware.vcloud.task+json\",\n    \"id\": \"urn:vcloud:task:29f70406-6c95-4490-b37d-1bc52f74f75a\",\n    \"operationKey\": null,\n    \"description\": null,\n    \"tasks\": null,\n    \"name\": \"task\",\n    \"owner\": {\n        \"otherAttributes\": {},\n        \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vApp/vm-e943f301-438d-43f0-81e6-d425c3b51954\",\n        \"id\": \"urn:vcloud:vm:e943f301-438d-43f0-81e6-d425c3b51954\",\n        \"type\": \"application/vnd.vmware.vcloud.vm+xml\",\n        \"name\": \"Vm-Lane\",\n        \"vCloudExtension\": []\n    },\n    \"error\": null,\n    \"user\": {\n        \"otherAttributes\": {},\n        \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/80af3db2-a3c1-49bd-867e-e60cf840ac26\",\n        \"id\": \"urn:vcloud:user:80af3db2-a3c1-49bd-867e-e60cf840ac26\",\n        \"type\": \"application/vnd.vmware.admin.user+xml\",\n        \"name\": \"8.1\",\n        \"vCloudExtension\": []\n    },\n    \"organization\": {\n        \"otherAttributes\": {},\n        \"href\": \"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/org/54184042-7d63-41a2-be62-14a5337ad41c\",\n        \"id\": \"urn:vcloud:org:54184042-7d63-41a2-be62-14a5337ad41c\",\n        \"type\": \"application/vnd.vmware.vcloud.org+xml\",\n        \"name\": \"sz101-1-1\",\n        \"vCloudExtension\": []\n    },\n    \"progress\": null,\n    \"params\": null,\n    \"details\": \"\",\n    \"vcTaskList\": null,\n    \"result\": null,\n    \"status\": \"queued\",\n    \"operation\": \"Stopping Virtual Machine Vm-Lane(e943f301-438d-43f0-81e6-d425c3b51954)\",\n    \"operationName\": \"vappUndeployPowerOff\",\n    \"serviceNamespace\": \"com.vmware.vcloud\",\n    \"startTime\": \"2022-07-11T00:00:49.089Z\",\n    \"endTime\": null,\n    \"expiryTime\": \"2022-11-08T00:00:49.089Z\",\n    \"cancelRequested\": false,\n    \"vCloudExtension\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "4. Delete VM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});",
+									"",
+									"// Remove vm name after you deleted it",
+									"pm.environment.set(\"vm_name\", \"\");",
+									"pm.environment.set(\"vm_url\", \"\");",
+									"pm.environment.set(\"vm_status\", \"\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if (pm.environment.get(\"vm_status\").toLowerCase() != \"powered_off\") {",
+									"    console.error(\"VM Status Still ON\");",
+									"    throw new Error(\"VM Status Still ON\");",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vcd_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/*;version={{vcd_api_version}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{vm_url}}",
+							"host": [
+								"{{vm_url}}"
+							]
+						},
+						"description": "Delete the VM with VM URL retrieved from previous step."
+					},
+					"response": [
+						{
+							"name": "4. Delete VM",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/*;version={{vcd_api_version}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{vm_url}}",
+									"host": [
+										"{{vm_url}}"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "cache-control",
+									"value": "no-store, must-revalidate"
+								},
+								{
+									"key": "content-type",
+									"value": "application/vnd.vmware.vcloud.task+xml;version=36.2"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 11 Jul 2022 00:01:05 GMT"
+								},
+								{
+									"key": "location",
+									"value": "https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/07d2f13b-7478-4b05-9aa2-c5a3d0957493"
+								},
+								{
+									"key": "x-vmware-vcloud-request-execution-time",
+									"value": "244,245"
+								},
+								{
+									"key": "x-vmware-vcloud-request-id",
+									"value": "5edaa5e2-0b71-44d1-bf04-9e0b5838199a"
+								},
+								{
+									"key": "content-length",
+									"value": "1956"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Task xmlns=\"http://www.vmware.com/vcloud/v1.5\" xmlns:vmext=\"http://www.vmware.com/vcloud/extension/v1.5\" xmlns:ovf=\"http://schemas.dmtf.org/ovf/envelope/1\" xmlns:vssd=\"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData\" xmlns:common=\"http://schemas.dmtf.org/wbem/wscim/1/common\" xmlns:rasd=\"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData\" xmlns:vmw=\"http://www.vmware.com/schema/ovf\" xmlns:ovfenv=\"http://schemas.dmtf.org/ovf/environment/1\" xmlns:ns9=\"http://www.vmware.com/vcloud/versions\" status=\"queued\" operation=\"Deleting Virtual Application Vm-Lane-80a17ac2-60c5-4aa3-ba1e-52ea43fa7f55(2a8f22ab-2eae-47e9-90e6-9af414d0927d)\" operationName=\"vdcDeleteVapp\" serviceNamespace=\"com.vmware.vcloud\" startTime=\"2022-07-11T00:01:05.059Z\" expiryTime=\"2022-11-08T00:01:05.059Z\" cancelRequested=\"false\" name=\"task\" id=\"urn:vcloud:task:07d2f13b-7478-4b05-9aa2-c5a3d0957493\" href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/task/07d2f13b-7478-4b05-9aa2-c5a3d0957493\" type=\"application/vnd.vmware.vcloud.task+xml\">\n    <Owner href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/vApp/vapp-2a8f22ab-2eae-47e9-90e6-9af414d0927d\" id=\"urn:vcloud:vapp:2a8f22ab-2eae-47e9-90e6-9af414d0927d\" type=\"application/vnd.vmware.vcloud.vApp+xml\" name=\"Vm-Lane-80a17ac2-60c5-4aa3-ba1e-52ea43fa7f55\"/>\n    <User href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/admin/user/80af3db2-a3c1-49bd-867e-e60cf840ac26\" id=\"urn:vcloud:user:80af3db2-a3c1-49bd-867e-e60cf840ac26\" type=\"application/vnd.vmware.admin.user+xml\" name=\"8.1\"/>\n    <Organization href=\"https://api-vcd-sz101.testportal.up.australiacloud.com.au/api/org/54184042-7d63-41a2-be62-14a5337ad41c\" id=\"urn:vcloud:org:54184042-7d63-41a2-be62-14a5337ad41c\" type=\"application/vnd.vmware.vcloud.org+xml\" name=\"sz101-1-1\"/>\n    <Details></Details>\n</Task>"
+						}
+					]
+				}
+			],
+			"description": "This folder demonstrates of how you can use vCD API to delete a VM step by step."
+		}
+	]
+}
