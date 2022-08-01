@@ -1,0 +1,54 @@
+edit_uri: 'https://github.ss.australiacloud.com.au/demos/vcd-postman-collection/edit/main/docs/'
+markdown_extensions:
+- admonition
+- markdown_include.include
+- pymdownx.emoji
+- pymdownx.magiclink
+- pymdownx.superfences
+- pymdownx.tabbed
+- pymdownx.tasklist
+- pymdownx.highlight
+- pymdownx.inlinehilite
+- pymdownx.snippets
+- toc:
+   permalink: ¤
+plugins:
+- search
+- macros
+- git-revision-date-localized
+repo_name: demos/vcd-postman-collection
+repo_url: https://github.ss.australiacloud.com.au/demos/vcd-postman-collection
+site_description: Documentation for vcd-postman-collection
+site_name: Documentation for vcd-postman-collection
+site_url: https://github.ss.australiacloud.com.au/demos/vcd-postman-collection
+theme:
+  logo: aucloud.svg
+  favicon: images/favicon.ico
+  features:
+  - content.code.annotate
+  - navigation.instant
+  - navigation.tracking
+  - navigation.sections
+  - navigation.top
+  - navigation.indexes
+  - toc.integrate
+  - navigation.tabs
+  - navigation.tabs.sticky
+  name: material
+  font: Questrial
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+extra:
+  generator: false
+nav:
