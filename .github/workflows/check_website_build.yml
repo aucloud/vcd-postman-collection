@@ -19,6 +19,12 @@ jobs:
         python-version: 3.9
     - name: Install dependencies
       run: make install
+
+    - name: Install pre-commit
+      run: make pre-commit-install
+
+    - name: Enforce markdown formatting with pre-commit
+      run: make mdformat
     - name: Build the docs site.
       shell: bash    
       run: |
