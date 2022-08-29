@@ -14,11 +14,11 @@ The following tools need to be installed first before running the testing:
 
 After installing all the required tools, please checkout this repo and import collection and environment json file to Postman by following below steps:
 
-1. Navigate to Collections in left panel
-1. Import the collections in collections folder
-1. Navigate to Environments in left panel
-1. Import the environments in environments folder
-1. Run the collection
+1. Navigate to Collections in left panel.
+1. Import the collections in collections folder.
+1. Navigate to Environments in left panel.
+1. Import the environments in environments folder.
+1. Run the collection.
 
 Before sending the request, please make sure those environment variables are entered correctly:
 
