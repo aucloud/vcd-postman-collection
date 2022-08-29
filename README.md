@@ -1,6 +1,6 @@
 # Documentation
 
-Here's the URL: https://pages.github.ss.australiacloud.com.au/demos/vcd-postman-collection
+Here's the URL: https://aucloud.github.io/vcd-postman-collection
 
 ## Contributing
 

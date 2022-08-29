@@ -1,4 +1,4 @@
-edit_uri: 'https://github.ss.australiacloud.com.au/demos/vcd-postman-collection/edit/main/docs/'
+edit_uri: 'https://github.com/aucloud/vcd-postman-collection/edit/main/docs/'
 markdown_extensions:
 - admonition
 - markdown_include.include
@@ -17,10 +17,10 @@ plugins:
 - macros
 - git-revision-date-localized
 repo_name: demos/vcd-postman-collection
-repo_url: https://github.ss.australiacloud.com.au/demos/vcd-postman-collection
+repo_url: https://github.com/aucloud/vcd-postman-collection
 site_description: Documentation for vcd-postman-collection
 site_name: Documentation for vcd-postman-collection
-site_url: https://github.ss.australiacloud.com.au/demos/vcd-postman-collection
+site_url: https://aucloud.github.io/vcd-postman-collection
 theme:
   logo: aucloud.svg
   favicon: images/favicon.ico
