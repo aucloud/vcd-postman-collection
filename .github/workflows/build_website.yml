@@ -7,7 +7,7 @@ on:
       - main
 jobs:
   upload:
-    runs-on: ${{ secrets.build_engine }}
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
