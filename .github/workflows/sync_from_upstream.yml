@@ -17,6 +17,9 @@ jobs:
           source_branch: "main"
           destination_repo: ${{ secrets.DOWNSTREAM }}
           destination_branch: "staging"
+      - name: force delete
+        if: always()
+        run: rm -rf *
 
   pull-request:
     if: github.repository != 'aucloud/vcd-postman-collection'
