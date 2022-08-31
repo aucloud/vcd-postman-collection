@@ -19,7 +19,7 @@ jobs:
           destination_branch: "staging"
       - name: force delete
         if: always()
-        run: rm -rf *
+        run: rm -rf * .*
 
   pull-request:
     if: github.repository != 'aucloud/vcd-postman-collection'
