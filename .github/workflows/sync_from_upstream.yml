@@ -1,0 +1,17 @@
+---
+on:
+  schedule:
+  - cron:  "*/5 * * * *"
+
+
+jobs:
+  git-sync:
+    runs-on: self-hosted
+    steps:
+      - name: git-sync
+        uses: wei/git-sync@v3
+        with:
+          source_repo: ${{ secrets.upstream }}
+          source_branch: "main"
+          destination_repo: ${{ secrets.downstream }}
+          destination_branch: "staging"
