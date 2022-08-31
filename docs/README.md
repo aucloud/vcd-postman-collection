@@ -20,6 +20,8 @@ After installing all the required tools, please checkout this repo and import co
 1. Import the environments in environments folder.
 1. Run the collection.
 
+I want this to change as it is crap.
+
 Before sending the request, please make sure those environment variables are entered correctly:
 
 - `vcd_api_host` : Vcd Api Endpoint from external portal.
