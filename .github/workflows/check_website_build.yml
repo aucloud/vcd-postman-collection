@@ -5,8 +5,35 @@ on:
     branches:
       - main
 jobs:
-  upload:
-    runs-on: ${{ secrets.build_engine }}
+  gh_public:
+    if: github.repository == 'aucloud/vcd-postman-collection'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        lfs: true
+        token: ${{ secrets.WRITE_PAT }} 
+        fetch-depth: 0
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: make install
+
+    - name: Install pre-commit
+      run: make pre-commit-install
+
+    - name: Enforce markdown formatting with pre-commit
+      run: make mdformat
+    - name: Build the docs site.
+      shell: bash    
+      run: |
+        make docs-validate
+
+  gh_private:
+    if: github.repository != 'aucloud/vcd-postman-collection'
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
       with:
