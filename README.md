@@ -1,8 +1,10 @@
-# Documentation
+# vcd-postman-collection
 
-Here's the URL: https://aucloud.github.io/vcd-postman-collection
+## How does this work?
 
-## Contributing
+[Check out the documentation site](Here's the URL: https://aucloud.github.io/vcd-postman-collection)
+
+## Contributing to this repo
 
 If you are editing the markdown files in this repo, the use of `mdformat` is mandatory to enforce a consistent style and minimise formatting errors.
 
