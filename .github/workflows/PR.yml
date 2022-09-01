@@ -13,11 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.WRITE_PAT }} 
+        token: ${{ secrets.PR_TOKEN }} 
         fetch-depth: 0
     - name: Login to github
       run: |
-        echo ${{ secrets.WRITE_PAT }} | gh auth login --hostname github.ss.australiacloud.com.au --with-token 
+        echo ${{ secrets.PR_TOKEN }} | gh auth login --hostname github.ss.australiacloud.com.au --with-token 
     - name: gh pr create
       run: |
         gh pr create --title "PR from public github" --body "Please merge me ASAP" --base main --head staging
