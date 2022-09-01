@@ -1,5 +1,5 @@
 ---
-name: Sync from upstream
+name: Open upstream PR
 on:
   push:
     branches:
@@ -20,5 +20,5 @@ jobs:
         pr_title: "chore: Pull Request from upstream, via staging" # Title of pull request
         pr_body: ":crown: *An automated PR*"              # Full markdown support, requires pr_title to be set
         pr_draft: false                                    # Creates pull request as draft
-        pr_allow_empty: false                              # Creates pull request even if there are no changes
+        pr_allow_empty: true                              # Creates pull request even if there are no changes
         github_token: ${{ secrets.WRITE_PAT }}
