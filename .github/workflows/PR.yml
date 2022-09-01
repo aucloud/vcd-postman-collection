@@ -1,8 +1,9 @@
 ---
 name: Sync from upstream
 on:
-  push: 
-    - "staging"
+  push:
+    branches:
+    - staging
 
 jobs:
   pull-request:
