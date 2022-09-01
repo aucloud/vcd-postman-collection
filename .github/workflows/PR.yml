@@ -1,0 +1,22 @@
+---
+name: Sync from upstream
+on:
+  push: 
+    - "staging"
+
+jobs:
+  pull-request:
+    if: github.repository != 'aucloud/vcd-postman-collection'
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: "staging"                                 
+        destination_branch: "main"                      # If blank, default: master
+        pr_title: "chore: Pull Request from upstream, via staging" # Title of pull request
+        pr_body: ":crown: *An automated PR*"              # Full markdown support, requires pr_title to be set
+        pr_draft: false                                    # Creates pull request as draft
+        pr_allow_empty: false                              # Creates pull request even if there are no changes
+        github_token: ${{ secrets.WRITE_PAT }}
