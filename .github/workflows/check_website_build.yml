@@ -31,7 +31,7 @@ jobs:
       run: |
         make docs-validate
 
-  gh_private:
+  staging:
     if: github.repository != 'aucloud/vcd-postman-collection'
     runs-on: self-hosted
     steps:

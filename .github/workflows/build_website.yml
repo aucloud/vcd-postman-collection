@@ -54,3 +54,18 @@ jobs:
       shell: bash    
       run: |
         make docs-build
+  redeploy_to_public:
+    if: github.repository != 'aucloud/vcd-postman-collection'
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        lfs: true
+        token: ${{ secrets.WRITE_PAT }}
+        fetch-depth: 0
+    - name: Add the remote
+      run: |
+        bash ./safe_add_remote.sh public ${{ secrets.UPSTREAM }}
+    - name: Push to remote
+      run: |
+        git push public main --force
